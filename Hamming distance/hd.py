@@ -25,10 +25,10 @@ for row in l_indexset:
         fw_dt.write(f"\t={int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}") #distance result 생성
         l_fq.append(f"{int(distance.hamming(i_row[0], i_col[0]) * len(i_row[0]))} + {int(distance.hamming(i_row[1], i_col[1]) * len(i_row[1]))}") #frequency []
 
-for i in l_fq:
-    d_fq[i] = d_fq.get(i, 0) + 1  # frequency {} 생성        
 fw_fq.write("HammingDist_i7\tHammingDist_i5\tIndex_Count") #frequency file column 생성
-for key in d_fq:
+for key in l_fq:
+    d_fq[key] = d_fq.get(key, 0) + 1  # frequency {} 생성        
+else:
     fw_fq.write(f"\n{key.split('+')[0]}\t{key.split('+')[1]}\t{d_fq[key]}") #frequency result 생성
 
 fr.close()
