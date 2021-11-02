@@ -22,14 +22,15 @@ for row in l_indexset:
     for col in l_indexset: #distance result 생성
         i_col = [list(col.split("+")[0]), list(col.split("+")[1])]
         fw_dt.write(f"\t={int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}")
-        try: #distance frequency 생성
-            d_fq[
-                f"{int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}"
-            ] += 1
-        except: #처음 값 등장시 오류 제거
-            d_fq[
-                f"{int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}"
-            ] = 1
+        d_fq[
+            f"{int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}"
+        ] = (
+            d_fq.get(
+                f"{int(distance.hamming(i_row[0],i_col[0])*len(i_row[0]))}+{int(distance.hamming(i_row[1],i_col[1])*len(i_row[1]))}",
+                0,
+            )
+            + 1
+        ) #frequency {}에 저장
 
 fw_fq.write("HammingDist_i7\tHammingDist_i5\tIndex_Count") #frequency file column 생성
 for key in d_fq:
