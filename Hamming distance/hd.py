@@ -38,4 +38,4 @@ for key in d_fq:
 
 fr.close()
 fw_dt.close()
-fw_fq.close
+fw_fq.close()
